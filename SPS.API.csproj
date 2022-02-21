@@ -1,0 +1,33 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="SPS.CORE\**" />
+    <Compile Remove="SPS.Data\**" />
+    <Compile Remove="SPS.Service\**" />
+    <Content Remove="SPS.CORE\**" />
+    <Content Remove="SPS.Data\**" />
+    <Content Remove="SPS.Service\**" />
+    <EmbeddedResource Remove="SPS.CORE\**" />
+    <EmbeddedResource Remove="SPS.Data\**" />
+    <EmbeddedResource Remove="SPS.Service\**" />
+    <None Remove="SPS.CORE\**" />
+    <None Remove="SPS.Data\**" />
+    <None Remove="SPS.Service\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove=".gitattributes" />
+    <None Remove=".gitignore" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MediatR" Version="10.0.1" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
+  </ItemGroup>
+
+
+</Project>

@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace SPS_API.Controllers
+namespace SPS.API.Controllers
 {
     [ApiController]
     [Route("[controller]")]
