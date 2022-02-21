@@ -1,6 +1,6 @@
 using System;
 
-namespace SPS_API
+namespace SPS.API
 {
     public class WeatherForecast
     {
