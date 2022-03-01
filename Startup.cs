@@ -7,8 +7,10 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using SPS.API.Extensions;
 using SPS.Core.Extensions;
 using SPS.Service.Accounts.Mapper;
+using SPS.Service.Categorys.Mapper;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -31,6 +33,8 @@ namespace SPS_API
         {
             services.AddDb(Configuration);
 
+            services.AddServices();
+
             services.AddControllers();
 
             services.AddCORSExtension();
@@ -46,7 +50,8 @@ namespace SPS_API
             services.AddMediatR(AppDomain.CurrentDomain.GetAssemblies());
 
             services.AddAutoMapper(typeof(AccountRequestMapper).Assembly);
-
+            services.AddAutoMapper(typeof(CategoryRequestMapper).Assembly);
+            
             services.AddAutoMapper(typeof(Startup));
         }
 

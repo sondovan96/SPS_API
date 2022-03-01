@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
@@ -15,6 +15,10 @@
   <ItemGroup>
     <ProjectReference Include="..\SPS.CORE\SPS.Core.csproj" />
     <ProjectReference Include="..\SPS.Data\SPS.Data.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Categorys\Queries\" />
   </ItemGroup>
 
 </Project>

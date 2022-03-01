@@ -25,7 +25,7 @@ namespace SPS.API.Controllers
         }
 
         [HttpPost("Login")]
-        public async Task<IActionResult> Login([FromBody] LoginRequest loginRequest)
+        public async Task<IActionResult> Login([FromForm] LoginRequest loginRequest)
         {
             var user = await _mediator.Send(loginRequest);
 
