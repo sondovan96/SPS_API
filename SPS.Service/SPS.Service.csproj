@@ -12,4 +12,9 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.22" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\SPS.CORE\SPS.Core.csproj" />
+    <ProjectReference Include="..\SPS.Data\SPS.Data.csproj" />
+  </ItemGroup>
+
 </Project>

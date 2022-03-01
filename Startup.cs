@@ -8,6 +8,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using SPS.Core.Extensions;
+using SPS.Service.Accounts.Mapper;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,6 +29,8 @@ namespace SPS_API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddDb(Configuration);
+
             services.AddControllers();
 
             services.AddCORSExtension();
@@ -38,7 +41,13 @@ namespace SPS_API
 
             services.AddVersioning();
 
-            services.AddMediatR(Assembly.GetExecutingAssembly());
+            services.AddOptions();
+
+            services.AddMediatR(AppDomain.CurrentDomain.GetAssemblies());
+
+            services.AddAutoMapper(typeof(AccountRequestMapper).Assembly);
+
+            services.AddAutoMapper(typeof(Startup));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
