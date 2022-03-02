@@ -11,10 +11,12 @@ namespace SPS.Data.Models.EntityConfigurations
     {
         public void Configure(EntityTypeBuilder<Category> builder)
         {
+            builder.ToTable("Category");
+
             builder.HasKey(c => c.Id);
 
             builder.Property(c => c.Title)
-                .HasColumnType("varchar(50)")
+                .HasMaxLength(250)
                 .IsRequired();
 
             builder.Property(c => c.MetaTitle)
@@ -23,6 +25,9 @@ namespace SPS.Data.Models.EntityConfigurations
 
             builder.Property(c => c.CreatedDate)
                 .HasDefaultValueSql("GETDATE()");
+
+            builder.Property(c => c.IsDeleted)
+                .HasDefaultValue<bool>(false);
         }
     }
 }
