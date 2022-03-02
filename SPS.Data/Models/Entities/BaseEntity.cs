@@ -4,7 +4,7 @@ using System.Text;
 
 namespace SPS.Data.Models.Entities
 {
-    public interface IEntityBase
+    public class EntityBase
     {
         public Guid Id { set; get; }
     }

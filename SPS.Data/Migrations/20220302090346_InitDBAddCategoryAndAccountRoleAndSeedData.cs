@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace SPS.Data.Migrations
 {
-    public partial class InitDB : Migration
+    public partial class InitDBAddCategoryAndAccountRoleAndSeedData : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -53,6 +53,22 @@ namespace SPS.Data.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AspNetUsers", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Category",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(nullable: false),
+                    Title = table.Column<string>(maxLength: 250, nullable: false),
+                    MetaTitle = table.Column<string>(type: "text", nullable: true),
+                    IsDeleted = table.Column<bool>(nullable: false, defaultValue: false),
+                    CreatedDate = table.Column<DateTime>(nullable: false, defaultValueSql: "GETDATE()"),
+                    ModifiedDate = table.Column<DateTime>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Category", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -161,27 +177,25 @@ namespace SPS.Data.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
-            migrationBuilder.CreateTable(
-                name: "Categories",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(nullable: false),
-                    Title = table.Column<string>(type: "varchar(50)", nullable: false),
-                    MetaTitle = table.Column<string>(type: "text", nullable: true),
-                    CreatorId = table.Column<Guid>(nullable: false),
-                    CreatedDate = table.Column<DateTime>(nullable: false, defaultValueSql: "GETDATE()"),
-                    ModifiedDate = table.Column<DateTime>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Categories", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Categories_AspNetUsers_CreatorId",
-                        column: x => x.CreatorId,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
+            migrationBuilder.InsertData(
+                table: "AspNetRoles",
+                columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
+                values: new object[] { new Guid("e9715a27-60a4-4f3e-a0c9-ac1765cd4126"), "edbd2e59-54b7-41e8-936d-7bbb36355628", "Admin", "ADMIN" });
+
+            migrationBuilder.InsertData(
+                table: "AspNetRoles",
+                columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
+                values: new object[] { new Guid("bcc8996d-ff06-4519-a009-f7cf3be4ff45"), "3dc4ab7b-5471-431b-bd9e-adf70921ec4f", "Staff", "STAFF" });
+
+            migrationBuilder.InsertData(
+                table: "AspNetUsers",
+                columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "DateOfBirth", "DepartmentId", "Email", "EmailConfirmed", "FirstName", "Gender", "IsDeleted", "LastName", "LockoutEnabled", "LockoutEnd", "ModifiedDate", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
+                values: new object[] { new Guid("6fcbe5a2-5c73-42fb-b334-748ffc143060"), 0, "22673857-7b55-49d7-9f30-cb0b464decb0", new DateTime(2022, 3, 2, 16, 3, 46, 515, DateTimeKind.Local).AddTicks(6988), new Guid("00000000-0000-0000-0000-000000000000"), "admin@example.com", false, "Default", false, false, "Admin", false, null, new DateTime(2022, 3, 2, 16, 3, 46, 514, DateTimeKind.Local).AddTicks(9853), "ADMIN@EXAMPLE.COM", "ADMIN", "AQAAAAEAACcQAAAAEF3LX6aDs0YZeIN01SQyN4sTRo3XiDqg9nLq/oEm2J0fR/aQwGxb1Hjksj8K9OgY0g==", "123456", false, null, false, "admin" });
+
+            migrationBuilder.InsertData(
+                table: "AspNetUserRoles",
+                columns: new[] { "UserId", "RoleId" },
+                values: new object[] { new Guid("6fcbe5a2-5c73-42fb-b334-748ffc143060"), new Guid("e9715a27-60a4-4f3e-a0c9-ac1765cd4126") });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
@@ -221,11 +235,6 @@ namespace SPS.Data.Migrations
                 column: "NormalizedUserName",
                 unique: true,
                 filter: "[NormalizedUserName] IS NOT NULL");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Categories_CreatorId",
-                table: "Categories",
-                column: "CreatorId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -246,7 +255,7 @@ namespace SPS.Data.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "Categories");
+                name: "Category");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");

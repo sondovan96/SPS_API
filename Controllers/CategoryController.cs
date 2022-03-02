@@ -23,7 +23,7 @@ namespace SPS.API.Controllers
 
         // POST api/<CategoryController>
         [HttpPost]
-        public async Task<IActionResult> AddCategory([FromBody] AddCategoryRequest request)
+        public async Task<IActionResult> AddCategory([FromForm] AddCategoryRequest request)
         {
             return Ok(await _mediator.Send(request));
         }

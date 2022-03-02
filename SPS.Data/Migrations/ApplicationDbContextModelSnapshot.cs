@@ -230,9 +230,9 @@ namespace SPS.Data.Migrations
                         {
                             Id = new Guid("6fcbe5a2-5c73-42fb-b334-748ffc143060"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "984d8b7e-dcc1-489d-bf1d-b477da2eabe6",
+                            ConcurrencyStamp = "22673857-7b55-49d7-9f30-cb0b464decb0",
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            DateOfBirth = new DateTime(2022, 2, 25, 14, 27, 41, 376, DateTimeKind.Local).AddTicks(7485),
+                            DateOfBirth = new DateTime(2022, 3, 2, 16, 3, 46, 515, DateTimeKind.Local).AddTicks(6988),
                             DepartmentId = new Guid("00000000-0000-0000-0000-000000000000"),
                             Email = "admin@example.com",
                             EmailConfirmed = false,
@@ -241,10 +241,10 @@ namespace SPS.Data.Migrations
                             IsDeleted = false,
                             LastName = "Admin",
                             LockoutEnabled = false,
-                            ModifiedDate = new DateTime(2022, 2, 25, 14, 27, 41, 375, DateTimeKind.Local).AddTicks(8108),
+                            ModifiedDate = new DateTime(2022, 3, 2, 16, 3, 46, 514, DateTimeKind.Local).AddTicks(9853),
                             NormalizedEmail = "ADMIN@EXAMPLE.COM",
                             NormalizedUserName = "ADMIN",
-                            PasswordHash = "AQAAAAEAACcQAAAAEOPgXs0BlCaJqRHP70GkbE9kl0ovW4cM1Y95jVyInwYikZGneYiRQqyJo5aT1/exDw==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEF3LX6aDs0YZeIN01SQyN4sTRo3XiDqg9nLq/oEm2J0fR/aQwGxb1Hjksj8K9OgY0g==",
                             PhoneNumber = "123456",
                             PhoneNumberConfirmed = false,
                             TwoFactorEnabled = false,
@@ -263,8 +263,10 @@ namespace SPS.Data.Migrations
                         .HasColumnType("datetime2")
                         .HasDefaultValueSql("GETDATE()");
 
-                    b.Property<Guid>("CreatorId")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<bool>("IsDeleted")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(false);
 
                     b.Property<string>("MetaTitle")
                         .HasColumnType("text");
@@ -274,13 +276,12 @@ namespace SPS.Data.Migrations
 
                     b.Property<string>("Title")
                         .IsRequired()
-                        .HasColumnType("varchar(50)");
+                        .HasColumnType("nvarchar(250)")
+                        .HasMaxLength(250);
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CreatorId");
-
-                    b.ToTable("Categories");
+                    b.ToTable("Category");
                 });
 
             modelBuilder.Entity("SPS.Data.Models.Entities.Role", b =>
@@ -314,14 +315,14 @@ namespace SPS.Data.Migrations
                         new
                         {
                             Id = new Guid("e9715a27-60a4-4f3e-a0c9-ac1765cd4126"),
-                            ConcurrencyStamp = "1a66938f-54e8-435c-846f-54901086e1c7",
+                            ConcurrencyStamp = "edbd2e59-54b7-41e8-936d-7bbb36355628",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
                             Id = new Guid("bcc8996d-ff06-4519-a009-f7cf3be4ff45"),
-                            ConcurrencyStamp = "19f09bcc-c4aa-4505-a166-a574c4877efb",
+                            ConcurrencyStamp = "3dc4ab7b-5471-431b-bd9e-adf70921ec4f",
                             Name = "Staff",
                             NormalizedName = "STAFF"
                         });
@@ -374,15 +375,6 @@ namespace SPS.Data.Migrations
                     b.HasOne("SPS.Data.Models.Entities.Account", null)
                         .WithMany()
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("SPS.Data.Models.Entities.Category", b =>
-                {
-                    b.HasOne("SPS.Data.Models.Entities.Account", "Creator")
-                        .WithMany()
-                        .HasForeignKey("CreatorId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
