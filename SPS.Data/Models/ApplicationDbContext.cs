@@ -17,11 +17,13 @@ namespace SPS.Data.Models
         }
         public DbSet<Category> Categories { set; get; }
         public DbSet<Product> Products { set; get; }
+        public DbSet<Image> Images { set; get; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
             builder.ApplyConfiguration(new CategoryConfiguration());
             builder.ApplyConfiguration(new ProductConfiguration());
+            builder.ApplyConfiguration(new ImageConfiguration());
             builder.ApplyConfiguration(new AccountConfiguration());
             builder.ApplyConfiguration(new RoleConfiguration());
 
