@@ -11,5 +11,7 @@ namespace SPS.Data.Models.Entities
         public bool IsDeleted { set; get; }
         public DateTime CreatedDate { get; set; }
         public DateTime ModifiedDate { get; set; }
+
+        public List<Product> Products { set; get; }
     }
 }
