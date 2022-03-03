@@ -29,8 +29,8 @@ namespace SPS.API.Controllers
             return Ok(await _mediator.Send(request));
         }
 
-        [HttpDelete]
-        public async Task<IActionResult> DeleteCategory([FromForm] DeleteCategoryRequest request)
+        [HttpDelete("{Id}")]
+        public async Task<IActionResult> DeleteCategory([FromRoute] DeleteCategoryRequest request)
         {
             if (await _mediator.Send(request) == false)
             {
