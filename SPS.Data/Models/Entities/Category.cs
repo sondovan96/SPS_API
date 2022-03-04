@@ -8,10 +8,14 @@ namespace SPS.Data.Models.Entities
     {
         public string Title { set; get; }
         public string MetaTitle { set; get; }
+        public Guid? ParentId { get; set; }
         public bool IsDeleted { set; get; }
         public DateTime CreatedDate { get; set; }
         public DateTime ModifiedDate { get; set; }
 
-        public List<Product> Products { set; get; }
+        public virtual Category ParentCategory { get; set; }
+
+        public virtual ICollection<Category> ChildCategories { get; }
+        public virtual ICollection<Product> Products { set; get; }
     }
 }

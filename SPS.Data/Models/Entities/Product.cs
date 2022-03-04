@@ -12,14 +12,17 @@ namespace SPS.Data.Models.Entities
         public bool IsDeleted { get; set; }
         public bool HotProduct { get; set; }
         public bool FeaturedProduct { get; set; }
-        public long Quantity { get; set; }
+        public long Stock { get; set; }
         public string Size { get; set; }
-        public string Color { get; set; }
-        public string ImagePath { get; set; }
+        public decimal Price { get; set; }
+        public decimal OriginalPrice { get; set; }
+        public int ViewCount { get; set; }
 
-        
+
         public Guid IdCategory { get; set; }
         public Category category { get; set; }
+
+        public ICollection<ProductImage> ProductImages { get; set; }
 
         public DateTime CreatedDate { get; set; }
         public DateTime ModifiedDate { get; set; }

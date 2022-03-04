@@ -6,13 +6,16 @@ using System.Text;
 
 namespace SPS.Data.Models.EntityConfigurations
 {
-    public class ImageConfiguration : IEntityTypeConfiguration<Image>
+    public class ProductImageConfiguration : IEntityTypeConfiguration<ProductImage>
     {
-        public void Configure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder<Image> builder)
+        public void Configure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder<ProductImage> builder)
         {
-            builder.ToTable("Image");
+            builder.ToTable("ProductImage");
 
             builder.HasKey(p => p.Id);
+            builder.HasOne(x => x.Product)
+                .WithMany(x => x.ProductImages)
+                .HasForeignKey(x => x.ProductID);
 
             builder.Property(c => c.ImagePath)
                 .HasColumnType("text")
