@@ -35,10 +35,13 @@ namespace SPS.Data.Models.EntityConfigurations
             builder.Property(c => c.FeaturedProduct)
                .HasDefaultValue<bool>(false);
 
-            builder.Property(x => x.Quantity)
+            builder.Property(x => x.Stock)
                 .HasDefaultValue<long>(0);
 
-            
+            builder.Property(x => x.ViewCount)
+                .HasDefaultValue<int>(0);
+
+
         }
     }
 }

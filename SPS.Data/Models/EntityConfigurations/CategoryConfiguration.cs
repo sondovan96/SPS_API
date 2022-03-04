@@ -14,6 +14,11 @@ namespace SPS.Data.Models.EntityConfigurations
             builder.ToTable("Category");
 
             builder.HasKey(c => c.Id);
+            builder.HasOne(p=>p.ParentCategory)
+                .WithMany(p=>p.ChildCategories)
+                .HasForeignKey(p=>p.ParentId)
+                .OnDelete(DeleteBehavior.NoAction);
+
 
             builder.Property(c => c.Title)
                 .HasMaxLength(250)
