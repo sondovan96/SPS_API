@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
 using SPS.Data.Models;
+using SPS.Data.Models.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -35,8 +36,27 @@ namespace SPS.Data.UnitOfWork
 
         public async Task<int> SaveChangesAsync()
         {
+            ValidateDate();
             var result = await _context.SaveChangesAsync();
             return result;
+        }
+        private void ValidateDate()
+        {
+            var entries = _context.ChangeTracker
+                .Entries()
+                .Where(e => e.Entity is IAuditEntity && (
+                        e.State == EntityState.Added
+                        || e.State == EntityState.Modified));
+
+            foreach (var entityEntry in entries)
+            {
+                ((IAuditEntity)entityEntry.Entity).ModifiedDate = DateTime.Now;
+
+                if (entityEntry.State == EntityState.Added)
+                {
+                    ((IAuditEntity)entityEntry.Entity).CreatedDate = DateTime.Now;
+                }
+            }
         }
 
         public void Dispose()

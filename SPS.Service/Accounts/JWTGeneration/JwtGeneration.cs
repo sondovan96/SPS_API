@@ -33,12 +33,6 @@ namespace SPS.Service.Accounts.JWTGeneration
         public async Task<JWTGenerationRequest> Handle(AccountRequest userModel, CancellationToken cancellationToken)
         {
             var user = _mapper.Map<AccountRequest, Account>(userModel);
-            //var user = new Account() 
-            //{
-            //    UserName = userModel.UserName,  
-            //    Email = userModel.Email,    
-                
-            //};
 
 
             var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Jwt:Key"]));
@@ -47,6 +41,9 @@ namespace SPS.Service.Accounts.JWTGeneration
             var claims = new List<Claim>() {
                 new Claim(JwtRegisteredClaimNames.Sub, user.UserName),
                 new Claim(JwtRegisteredClaimNames.Email, user.Email),
+                new Claim(JwtRegisteredClaimNames.Prn, user.PhoneNumber),
+                new Claim(JwtRegisteredClaimNames.Name, user.FullName),
+                new Claim(JwtRegisteredClaimNames.Gender, user.Gender!=true?"female":"male"),
                 new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
             };
 

@@ -1,4 +1,5 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -18,5 +19,6 @@ namespace SPS.Data.Repositories
         public void Remove(TEntity entity);
         public void RemoveRange(ICollection<TEntity> entities);
         public void RemoveById(Guid Id);
+        
     }
 }

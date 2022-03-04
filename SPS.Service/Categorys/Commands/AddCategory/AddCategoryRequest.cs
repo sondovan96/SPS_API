@@ -10,6 +10,7 @@ namespace SPS.Service.Categorys.Commands.AddCategory
     {
         public string Title { set; get; }
         public string MetaTitle { set; get; }
+        public Guid? ParentId { get; set; }
         public DateTime CreatedDate { get; set; }
         public DateTime ModifiedDate { get; set; }
     }

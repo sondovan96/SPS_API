@@ -24,6 +24,7 @@ namespace SPS.Core.Extensions
                     config.AddProfile(Activator.CreateInstance(file) as Profile);
                 }
             });
+
         }
     }
 }

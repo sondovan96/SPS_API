@@ -37,6 +37,7 @@ namespace SPS.Data.Repositories
             return _context.ToList();
         }
 
+
         public IQueryable<TEntity> InitQuery()
         {
             return _context;
@@ -67,5 +68,6 @@ namespace SPS.Data.Repositories
         {
             _context.UpdateRange(entities);
         }
+
     }
 }
