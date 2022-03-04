@@ -21,6 +21,13 @@ namespace SPS.Core.Constants
         {
             public const string LoginFail = "Login Fail";
         }
+        public static class ApplicationSettings
+        {
+            public static class DefaultValues
+            {
+                public const int PageSize = 25;
+            }
+        }
         
     }
 }

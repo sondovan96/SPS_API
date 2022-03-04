@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using SPS.Core.Helper;
 using SPS.Data.Repositories;
 using SPS.Data.UnitOfWork;
 using System.Reflection;
@@ -11,6 +12,7 @@ namespace SPS.API.Extensions
         {
             services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
             services.AddScoped<IUnitOfWork, UnitOfWork>();
+            services.AddScoped<IPageList, PageList>();
 
             services.Scan(scan =>
             {

@@ -14,6 +14,7 @@ namespace SPS.Service.Categorys.Mapper
         {
             CreateMap<Category, AddCategoryRequest>().ReverseMap();
             CreateMap<CategoryModel, AddCategoryRequest>().ReverseMap();
+            CreateMap<CategoryModel, Category>().ReverseMap();
         }
     }
 }

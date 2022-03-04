@@ -17,8 +17,4 @@
     <ProjectReference Include="..\SPS.Data\SPS.Data.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Categorys\Queries\" />
-  </ItemGroup>
-
 </Project>

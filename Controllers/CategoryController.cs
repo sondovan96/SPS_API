@@ -1,8 +1,11 @@
 ﻿using MediatR;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using SPS.Core.Models.Category;
+using SPS.Core.Models.Result;
 using SPS.Service.Categorys.Commands.AddCategory;
 using SPS.Service.Categorys.Commands.DeleteCategory;
+using SPS.Service.Categorys.Queries.GetAllCategory;
+using Swashbuckle.AspNetCore.Annotations;
 using System.Threading.Tasks;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -20,15 +23,33 @@ namespace SPS.API.Controllers
         {
             _mediator = mediator;
         }
+        /// <summary>
+        /// Get All category
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
+        [HttpGet]
+        public async Task<IActionResult> GetCategory([FromQuery] GetAllCategoryRequest request)
+        {
+            return Ok(await _mediator.Send(request));
+        }
 
-
+        /// <summary>
+        /// Add category
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
         // POST api/<CategoryController>
         [HttpPost]
         public async Task<IActionResult> AddCategory([FromForm] AddCategoryRequest request)
         {
             return Ok(await _mediator.Send(request));
         }
-
+        /// <summary>
+        /// Delete Category by Id
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
         [HttpDelete("{Id}")]
         public async Task<IActionResult> DeleteCategory([FromRoute] DeleteCategoryRequest request)
         {

@@ -48,7 +48,7 @@ namespace SPS_API
             services.AddOptions();
 
             services.AddMediatR(AppDomain.CurrentDomain.GetAssemblies());
-
+            //Register AutoMapper
             services.AddAutoMapper(typeof(AccountRequestMapper).Assembly);
             services.AddAutoMapper(typeof(CategoryRequestMapper).Assembly);
             
