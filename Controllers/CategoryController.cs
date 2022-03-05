@@ -7,6 +7,7 @@ using SPS.Service.Categorys.Commands.DeleteCategory;
 using SPS.Service.Categorys.Commands.UpdateCategory;
 using SPS.Service.Categorys.Queries.GetAllCategory;
 using Swashbuckle.AspNetCore.Annotations;
+using System;
 using System.Threading.Tasks;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -19,7 +20,7 @@ namespace SPS.API.Controllers
     public class CategoryController : ControllerBase
     {
         private readonly IMediator _mediator;
-        
+
         public CategoryController(IMediator mediator)
         {
             _mediator = mediator;
@@ -62,13 +63,12 @@ namespace SPS.API.Controllers
         }
 
         [HttpPut]
-        public async Task<IActionResult> UpdateCategory([FromForm] UpdateCategoryRequest request)
+        [Route("UpdateCategory/{Id}")]
+        public async Task<IActionResult> UpdateCategory([FromForm] UpdateCategoryRequest request,[FromRoute(Name ="Id")] Guid Id)
         {
-            if(await _mediator.Send(request) == false)
-            {
-                return NotFound("Cannout found your category!");
-            }
-            return Ok();
+            request.Id = Id;
+            var result = await _mediator.Send(request);
+            return Ok(result);
         }
     }
 }
