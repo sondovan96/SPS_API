@@ -4,6 +4,7 @@ using SPS.Core.Models.Category;
 using SPS.Core.Models.Result;
 using SPS.Service.Categorys.Commands.AddCategory;
 using SPS.Service.Categorys.Commands.DeleteCategory;
+using SPS.Service.Categorys.Commands.UpdateCategory;
 using SPS.Service.Categorys.Queries.GetAllCategory;
 using Swashbuckle.AspNetCore.Annotations;
 using System.Threading.Tasks;
@@ -54,6 +55,16 @@ namespace SPS.API.Controllers
         public async Task<IActionResult> DeleteCategory([FromRoute] DeleteCategoryRequest request)
         {
             if (await _mediator.Send(request) == false)
+            {
+                return NotFound("Cannout found your category!");
+            }
+            return Ok();
+        }
+
+        [HttpPut]
+        public async Task<IActionResult> UpdateCategory([FromForm] UpdateCategoryRequest request)
+        {
+            if(await _mediator.Send(request) == false)
             {
                 return NotFound("Cannout found your category!");
             }
