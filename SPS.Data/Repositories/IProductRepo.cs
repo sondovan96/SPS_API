@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SPS.Data.Repositories
 {
-    public interface ICategoryRepo : IRepository<Category>
+    public interface IProductRepo : IRepository<Product>
     {
     }
 }
