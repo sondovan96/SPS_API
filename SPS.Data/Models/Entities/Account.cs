@@ -15,5 +15,7 @@ namespace SPS.Data.Models.Entities
         public DateTime CreatedDate { get; set; }
         public DateTime ModifiedDate { get; set; }
         public bool IsDeleted { get; set; }
+
+        public ICollection<Order> Orders { set; get; }
     }
 }
