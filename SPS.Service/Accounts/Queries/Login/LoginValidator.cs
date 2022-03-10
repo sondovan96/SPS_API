@@ -10,10 +10,10 @@ namespace SPS.Service.Accounts.Queries.Login
     {
         public LoginValidator()
         {
-            RuleFor(x => x.UserName).NotEmpty()
-                .WithMessage("Please enter your username!");
+            RuleFor(x => x.Email).NotEmpty()
+                .WithMessage("Please enter your Email!");
             RuleFor(x => x.Password).NotEmpty()
-                .WithMessage("Please enter your password!");
+                .WithMessage("Please enter your Password!");
         }
     }
 }

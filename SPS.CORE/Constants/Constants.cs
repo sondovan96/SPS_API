@@ -28,6 +28,22 @@ namespace SPS.Core.Constants
                 public const int PageSize = 25;
             }
         }
+        public static class HTTPClient
+        {
+            public const string BearerTokenHeader = "Bearer";
+        }
+        public static class User
+        {
+            public static class Email
+            {
+                public const string EmailconfirmationSubject = "[SP SHOP] Email confirmation";
+                public const bool RequireEmailConfirmation = false;
+            }
+            public static class Role
+            {
+                public const string Customer = "Customer";
+            }
+        }
         
     }
 }

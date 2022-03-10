@@ -6,6 +6,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using SPS.Core.Models.Account;
 using SPS.Data.Models.Entities;
+using SPS.Service.Accounts.JWTGeneration;
 using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
@@ -16,23 +17,38 @@ using System.Threading.Tasks;
 
 namespace SPS.Service.Accounts.Queries.Login
 {
-    public class LoginHandler : IRequestHandler<LoginRequest, AccountModel>
+    public class LoginHandler : IRequestHandler<LoginRequest, JWTGenerationRequest>
     {
         private readonly UserManager<Account> _userManager;
-        private readonly IMapper _mapper;
-        public LoginHandler(UserManager<Account> userManager, IMapper mapper)
+        public LoginHandler(UserManager<Account> userManager)
         {
             _userManager = userManager;
-            _mapper = mapper;
         }
-        public async Task<AccountModel> Handle(LoginRequest request, CancellationToken cancellationToken)
+        public async Task<JWTGenerationRequest> Handle(LoginRequest request, CancellationToken cancellationToken)
         {
-            var user = await _userManager.FindByNameAsync(request.UserName)
-                ?? await _userManager.FindByEmailAsync(request.UserName);
+            var user = await _userManager.FindByEmailAsync(request.Email);
 
-            var userModel = _mapper.Map<Account, AccountModel>(user);
+            if(user!=null)
+            {
+                bool result = await _userManager.CheckPasswordAsync(user, request.Password);
+                if(result)
+                {
+                    Task<bool> isConfirmedEmailTask = _userManager.IsEmailConfirmedAsync(user);
+                    Task<IList<string>> rolesTask = _userManager.GetRolesAsync(user);
 
-            return await Task.FromResult(userModel);
+                    return new JWTGenerationRequest
+                    {
+                        Email = user.Email,
+                        Roles = await rolesTask,
+                        IsConfirmedEmail = await isConfirmedEmailTask,
+                        FirstName = user.FirstName,
+                        LastName = user.LastName,
+                        Id = user.Id
+                    };
+                }
+            }
+
+            return null;
         }
         
     }

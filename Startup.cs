@@ -9,6 +9,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using SPS.API.Extensions;
 using SPS.Core.Extensions;
+using SPS.Core.Models.Account;
 using SPS.Service.Accounts.Mapper;
 using SPS.Service.Categorys.Mapper;
 using System;
@@ -53,6 +54,10 @@ namespace SPS_API
             services.AddAutoMapper(typeof(CategoryRequestMapper).Assembly);
             
             services.AddAutoMapper(typeof(Startup));
+
+            services.Configure<JwtOptions>(Configuration.GetSection(JwtOptions.Key));
+            services.Configure<GmailOption>(Configuration.GetSection(GmailOption.Key));
+            services.Configure<YandexOption>(Configuration.GetSection(YandexOption.Key));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

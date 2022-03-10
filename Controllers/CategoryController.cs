@@ -6,6 +6,7 @@ using SPS.Service.Categorys.Commands.AddCategory;
 using SPS.Service.Categorys.Commands.DeleteCategory;
 using SPS.Service.Categorys.Commands.UpdateCategory;
 using SPS.Service.Categorys.Queries.GetAllCategory;
+using SPS.Service.Categorys.Queries.GetCategoryById;
 using Swashbuckle.AspNetCore.Annotations;
 using System;
 using System.Threading.Tasks;
@@ -32,6 +33,13 @@ namespace SPS.API.Controllers
         /// <returns></returns>
         [HttpGet]
         public async Task<IActionResult> GetCategory([FromQuery] GetAllCategoryRequest request)
+        {
+            return Ok(await _mediator.Send(request));
+        }
+
+        [HttpGet]
+        [Route("{Id}")]
+        public async Task<IActionResult> GetCategoryById([FromRoute] GetCategoryByIdRequest request)
         {
             return Ok(await _mediator.Send(request));
         }
