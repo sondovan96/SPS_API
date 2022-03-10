@@ -1,11 +1,17 @@
 ﻿using AutoMapper;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SPS.Core.Constants;
 using SPS.Core.Models.Account;
+using SPS.Service.Accounts.Command.RegisterAccount;
 using SPS.Service.Accounts.JWTGeneration;
+using SPS.Service.Accounts.Queries.EmailConfirm;
+using SPS.Service.Accounts.Queries.EmailConfirmToken;
 using SPS.Service.Accounts.Queries.Login;
+using SPS.Service.Accounts.Queries.Logout;
+using System;
 using System.Threading.Tasks;
 
 namespace SPS.API.Controllers
@@ -24,21 +30,79 @@ namespace SPS.API.Controllers
             _mapper = mapper;
         }
 
-        [HttpPost("Login")]
-        public async Task<IActionResult> Login([FromForm] LoginRequest loginRequest)
+        [HttpPost("Register")]
+        public async Task<IActionResult> Register([FromBody] RegisterAccountRequest request)
         {
-            var user = await _mediator.Send(loginRequest);
-
-            
-            if (user != null)
+            var accountRequest = await _mediator.Send(request);
+            if(Constants.User.Email.RequireEmailConfirmation)
             {
-                var accountRequest = _mapper.Map<AccountModel, AccountRequest>(user);
+                if(!accountRequest.IsConfirmedEmail)
+                {
+                    try
+                    {
+                        await _mediator.Send(new EmailConfirmTokenRequest
+                        {
+                            Email = accountRequest.Email,
+                            RedirectUrl = request.EmailConfirmationRedirectUrl
+                        });
+                    }
+                    catch (Exception)
+                    {
 
-                var token = await _mediator.Send(accountRequest);
-                return Ok(new { token = token });
+                    }
+                }
             }
+            return Created("", await _mediator.Send(accountRequest));
+        }
 
+        [HttpPost("Login")]
+        public async Task<IActionResult> Login([FromBody] LoginRequest request)
+        {
+            var loginRequest = await _mediator.Send(request);
+            if (loginRequest != null)
+            {
+                if (Constants.User.Email.RequireEmailConfirmation)
+                {
+                    if(!loginRequest.IsConfirmedEmail)
+                    {
+                        try
+                        {
+                            await _mediator.Send(new EmailConfirmTokenRequest
+                            {
+                                Email = loginRequest.Email,
+                                RedirectUrl = request.EmailConfirmationRedirectUrl
+                            });
+                        }
+                        catch (Exception)
+                        {
+
+                        }
+                    }
+                    
+                }
+                return Ok(await _mediator.Send(loginRequest));
+            }
             return NotFound(Constants.Messages.LoginFail);
+        }
+
+        [Authorize]
+        [HttpPost("Logout")]
+        public async Task<IActionResult> LogOut()
+        {
+            await _mediator.Send(new LogoutRequest());
+            return Ok();
+        }
+        [HttpPost("send-confirmation-email")]
+        public async Task<IActionResult> SendEmailToConfirm([FromBody] EmailConfirmTokenRequest request) 
+        {
+            await _mediator.Send(request);
+            return Ok();
+        }
+        [HttpPost("email-confirmation")]
+        public async Task<IActionResult> ConfirmEmail([FromBody] EmailConfirmRequest request)
+        {
+            JWTGenerationRequest result= await _mediator.Send(request);
+            return Ok(await _mediator.Send(result));
         }
     }
 }

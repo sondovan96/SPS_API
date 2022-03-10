@@ -12,7 +12,6 @@ namespace SPS.Data.Models.Entities
         public string FullName { set; get; }
         public DateTime DateOfBirth { set; get; }
         public bool Gender { set; get; }
-        public Guid DepartmentId { set; get; }
         public DateTime CreatedDate { get; set; }
         public DateTime ModifiedDate { get; set; }
         public bool IsDeleted { get; set; }

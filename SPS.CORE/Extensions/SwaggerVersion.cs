@@ -26,6 +26,7 @@ namespace SPS.Core.Extensions
                 config.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
                 {
                     Name = "Authorization",
+                    BearerFormat = "JWT",
                     In = ParameterLocation.Header,
                     Type = SecuritySchemeType.ApiKey,
                     Description = "Authorization Key"

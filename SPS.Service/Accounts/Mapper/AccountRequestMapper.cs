@@ -12,8 +12,7 @@ namespace SPS.Service.Accounts.Mapper
     {
         public AccountRequestMapper()
         {
-            CreateMap<Account, AccountRequest>().ReverseMap();
-            CreateMap<AccountModel, AccountRequest>().ReverseMap();
+            CreateMap<AccountModel, JWTGenerationRequest>().ReverseMap();
         }
     }
 }
