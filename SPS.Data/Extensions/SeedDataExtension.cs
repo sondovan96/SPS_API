@@ -40,8 +40,8 @@ namespace SPS.Data.Extensions
             new Role()
             {
                 Id = new Guid("BCC8996D-FF06-4519-A009-F7CF3BE4FF45"),
-                Name = "Staff",
-                NormalizedName = "Staff".ToUpper()
+                Name = "Customer",
+                NormalizedName = "Customer".ToUpper()
             }
         };
 
