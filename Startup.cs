@@ -12,6 +12,7 @@ using SPS.Core.Extensions;
 using SPS.Core.Models.Account;
 using SPS.Service.Accounts.Mapper;
 using SPS.Service.Categorys.Mapper;
+using SPS.Service.Orders.Mapper;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -42,8 +43,10 @@ namespace SPS_API
 
             services.ConfigureAutoMapper();
 
+            //add extension JWT
             services.AddJWT(configuration: Configuration);
 
+            //add extension Swagger
             services.AddVersioning();
 
             services.AddOptions();
@@ -52,9 +55,10 @@ namespace SPS_API
             //Register AutoMapper
             services.AddAutoMapper(typeof(AccountRequestMapper).Assembly);
             services.AddAutoMapper(typeof(CategoryRequestMapper).Assembly);
-            
+            services.AddAutoMapper(typeof(OrderMapper).Assembly);
             services.AddAutoMapper(typeof(Startup));
 
+            //Config Options
             services.Configure<JwtOptions>(Configuration.GetSection(JwtOptions.Key));
             services.Configure<GmailOption>(Configuration.GetSection(GmailOption.Key));
             services.Configure<YandexOption>(Configuration.GetSection(YandexOption.Key));

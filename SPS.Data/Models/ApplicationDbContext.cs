@@ -19,6 +19,8 @@ namespace SPS.Data.Models
         public DbSet<Product> Products { set; get; }
         public DbSet<ProductImage> ProductImages { set; get; }
         public DbSet<Promotion> Promotions { set; get; }
+        public DbSet<Order> Orders { set; get; }
+        public DbSet<OrderDetail> OrderDetails { set; get; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -28,6 +30,8 @@ namespace SPS.Data.Models
             builder.ApplyConfiguration(new PromotionConfiguration());
             builder.ApplyConfiguration(new AccountConfiguration());
             builder.ApplyConfiguration(new RoleConfiguration());
+            builder.ApplyConfiguration(new OrderConfiguration());
+            builder.ApplyConfiguration(new OrderDetailConfiguration());
 
             builder.SeedUserRole();
 
