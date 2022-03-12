@@ -7,6 +7,8 @@
   <ItemGroup>
     <Compile Remove="Migrations\20220304164142_AddTablePromotionProductImage.cs" />
     <Compile Remove="Migrations\20220304164142_AddTablePromotionProductImage.Designer.cs" />
+    <Compile Remove="Migrations\20220312093857_FixTableProductImage.cs" />
+    <Compile Remove="Migrations\20220312093857_FixTableProductImage.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

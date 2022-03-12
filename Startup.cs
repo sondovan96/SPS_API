@@ -1,23 +1,22 @@
 using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
+
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
+
 using SPS.API.Extensions;
 using SPS.Core.Extensions;
 using SPS.Core.Models.Account;
+using SPS.Core.Models.Photos;
 using SPS.Service.Accounts.Mapper;
 using SPS.Service.Categorys.Mapper;
+using SPS.Service.OrderDetails.Mapper;
 using SPS.Service.Orders.Mapper;
+using SPS.Service.ProductImages.Mapper;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using System.Threading.Tasks;
+
 
 namespace SPS_API
 {
@@ -56,12 +55,16 @@ namespace SPS_API
             services.AddAutoMapper(typeof(AccountRequestMapper).Assembly);
             services.AddAutoMapper(typeof(CategoryRequestMapper).Assembly);
             services.AddAutoMapper(typeof(OrderMapper).Assembly);
+            services.AddAutoMapper(typeof(OrderDetailMapper).Assembly);
+            services.AddAutoMapper(typeof(ProductImageMapper).Assembly);
+            
             services.AddAutoMapper(typeof(Startup));
 
             //Config Options
             services.Configure<JwtOptions>(Configuration.GetSection(JwtOptions.Key));
             services.Configure<GmailOption>(Configuration.GetSection(GmailOption.Key));
             services.Configure<YandexOption>(Configuration.GetSection(YandexOption.Key));
+            services.Configure<CloudinarySetting>(Configuration.GetSection("Cloudinary"));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

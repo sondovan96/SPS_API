@@ -18,6 +18,7 @@ namespace SPS.Core.Models.Product
         public decimal Price { get; set; }
         public decimal OriginalPrice { get; set; }
         public int ViewCount { get; set; }
+        public string Image { get; set; }
         public Guid IdCategory { get; set; }
         public DateTime CreatedDate { get; set; }
         public DateTime ModifiedDate { get; set; }
