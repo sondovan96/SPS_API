@@ -17,12 +17,6 @@ namespace SPS.Data.Models.EntityConfigurations
                 .WithMany(x => x.ProductImages)
                 .HasForeignKey(x => x.ProductID);
 
-            builder.Property(c => c.ImagePath)
-                .HasColumnType("text")
-                .IsRequired(true);
-
-            builder.Property(c => c.CreatedDate)
-                .HasDefaultValueSql("GETDATE()");
         }
     }
 }

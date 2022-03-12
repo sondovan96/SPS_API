@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SPS.Data.Models;
 
 namespace SPS.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220312094735_deleteTableProductImage")]
+    partial class deleteTableProductImage
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -227,9 +229,9 @@ namespace SPS.Data.Migrations
                         {
                             Id = new Guid("6fcbe5a2-5c73-42fb-b334-748ffc143060"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "316826fe-01b1-493a-932b-cbe020c3dc23",
+                            ConcurrencyStamp = "88a4fdc4-9ff0-4864-870b-10c67f8b3012",
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            DateOfBirth = new DateTime(2022, 3, 12, 16, 48, 56, 565, DateTimeKind.Local).AddTicks(1822),
+                            DateOfBirth = new DateTime(2022, 3, 12, 16, 47, 34, 950, DateTimeKind.Local).AddTicks(200),
                             Email = "admin@example.com",
                             EmailConfirmed = false,
                             FirstName = "Default",
@@ -237,10 +239,10 @@ namespace SPS.Data.Migrations
                             IsDeleted = false,
                             LastName = "Admin",
                             LockoutEnabled = false,
-                            ModifiedDate = new DateTime(2022, 3, 12, 16, 48, 56, 564, DateTimeKind.Local).AddTicks(4358),
+                            ModifiedDate = new DateTime(2022, 3, 12, 16, 47, 34, 949, DateTimeKind.Local).AddTicks(2839),
                             NormalizedEmail = "ADMIN@EXAMPLE.COM",
                             NormalizedUserName = "ADMIN",
-                            PasswordHash = "AQAAAAEAACcQAAAAEA+YGtAMDAgcyDM9BTXvkEU+knumoYgHjNBa+CfxZgLzITGOMlwnJnJz7ZnyRDfx/w==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEMSgQFemtu6eqGjLz7hRrxs4cBQzDXd5UuOF6WcN1auie1M2iP6oQPdVuiKvQsEX4w==",
                             PhoneNumber = "123456",
                             PhoneNumberConfirmed = false,
                             TwoFactorEnabled = false,
@@ -425,27 +427,6 @@ namespace SPS.Data.Migrations
                     b.ToTable("Product");
                 });
 
-            modelBuilder.Entity("SPS.Data.Models.Entities.ProductImage", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<bool>("IsMain")
-                        .HasColumnType("bit");
-
-                    b.Property<Guid>("ProductID")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("Url")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ProductID");
-
-                    b.ToTable("ProductImage");
-                });
-
             modelBuilder.Entity("SPS.Data.Models.Entities.Promotion", b =>
                 {
                     b.Property<Guid>("Id")
@@ -515,14 +496,14 @@ namespace SPS.Data.Migrations
                         new
                         {
                             Id = new Guid("e9715a27-60a4-4f3e-a0c9-ac1765cd4126"),
-                            ConcurrencyStamp = "47ab1ab0-1340-442f-b346-653aa1f22a09",
+                            ConcurrencyStamp = "66766dd7-e266-475d-9cc3-bc63e6443f28",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
                             Id = new Guid("bcc8996d-ff06-4519-a009-f7cf3be4ff45"),
-                            ConcurrencyStamp = "5420335d-7a47-40eb-9d68-3caa9dd5dc94",
+                            ConcurrencyStamp = "36a913d8-d8f9-4c29-838d-ede0b62055e7",
                             Name = "Customer",
                             NormalizedName = "CUSTOMER"
                         });
@@ -616,15 +597,6 @@ namespace SPS.Data.Migrations
                     b.HasOne("SPS.Data.Models.Entities.Category", "category")
                         .WithMany("Products")
                         .HasForeignKey("IdCategory")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("SPS.Data.Models.Entities.ProductImage", b =>
-                {
-                    b.HasOne("SPS.Data.Models.Entities.Product", "Product")
-                        .WithMany("ProductImages")
-                        .HasForeignKey("ProductID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
