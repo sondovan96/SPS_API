@@ -18,8 +18,4 @@
     <ProjectReference Include="..\SPS.Data\SPS.Data.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Products\Queries\" />
-  </ItemGroup>
-
 </Project>

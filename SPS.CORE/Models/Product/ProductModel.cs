@@ -1,11 +1,14 @@
-﻿using System;
+﻿using SPS.Data.Models.Entities;
+using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Text.Json.Serialization;
 
 namespace SPS.Core.Models.Product
 {
     public class ProductModel
     {
+        [JsonIgnore]
         public Guid Id { get; set; }
         public string ProductName { get; set; }
         public string ProductDescription { get; set; }
@@ -19,6 +22,8 @@ namespace SPS.Core.Models.Product
         public decimal OriginalPrice { get; set; }
         public int ViewCount { get; set; }
         public string Image { get; set; }
+        public ICollection<ProductImage> ProductImages { get; set; }
+        public Data.Models.Entities.Category Category { get; set; }
         public Guid IdCategory { get; set; }
         public DateTime CreatedDate { get; set; }
         public DateTime ModifiedDate { get; set; }

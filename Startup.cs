@@ -15,6 +15,7 @@ using SPS.Service.Categorys.Mapper;
 using SPS.Service.OrderDetails.Mapper;
 using SPS.Service.Orders.Mapper;
 using SPS.Service.ProductImages.Mapper;
+using SPS.Service.Products.Mapper;
 using System;
 
 
@@ -36,7 +37,10 @@ namespace SPS_API
 
             services.AddServices();
 
-            services.AddControllers();
+            services.AddControllers().AddNewtonsoftJson
+                (
+                    x => x.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
+                );
 
             services.AddCORSExtension();
 
@@ -57,7 +61,8 @@ namespace SPS_API
             services.AddAutoMapper(typeof(OrderMapper).Assembly);
             services.AddAutoMapper(typeof(OrderDetailMapper).Assembly);
             services.AddAutoMapper(typeof(ProductImageMapper).Assembly);
-            
+            services.AddAutoMapper(typeof(ProductMapper).Assembly);
+
             services.AddAutoMapper(typeof(Startup));
 
             //Config Options

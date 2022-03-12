@@ -28,11 +28,12 @@ namespace SPS.Service.Products.Commands.AddProduct
         public async Task<ProductModel> Handle(AddProductRequest request, CancellationToken cancellationToken)
         {
             var product = _mapper.Map<AddProductRequest, Product>(request);
-            if(request != null)
-            {
-                await _productRepo.AddAsync(product);
-                await _unitofwork.SaveChangesAsync();
-            }
+            product.CreatedDate = DateTime.UtcNow;
+            product.ModifiedDate = DateTime.UtcNow;
+
+            await _productRepo.AddAsync(product);
+
+            await _unitofwork.SaveChangesAsync();
 
             return _mapper.Map<AddProductRequest, ProductModel>(request);
         }

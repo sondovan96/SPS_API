@@ -15,7 +15,7 @@ namespace SPS.Data.Models.EntityConfigurations
 
             builder.HasKey(p => p.Id);
 
-            builder.HasOne(x => x.category)
+            builder.HasOne(x => x.Category)
                 .WithMany(x => x.Products)
                 .HasForeignKey(x => x.IdCategory);
 
