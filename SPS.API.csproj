@@ -8,15 +8,19 @@
     <Compile Remove="SPS.CORE\**" />
     <Compile Remove="SPS.Data\**" />
     <Compile Remove="SPS.Service\**" />
+    <Compile Remove="SPS.UI\**" />
     <Content Remove="SPS.CORE\**" />
     <Content Remove="SPS.Data\**" />
     <Content Remove="SPS.Service\**" />
+    <Content Remove="SPS.UI\**" />
     <EmbeddedResource Remove="SPS.CORE\**" />
     <EmbeddedResource Remove="SPS.Data\**" />
     <EmbeddedResource Remove="SPS.Service\**" />
+    <EmbeddedResource Remove="SPS.UI\**" />
     <None Remove="SPS.CORE\**" />
     <None Remove="SPS.Data\**" />
     <None Remove="SPS.Service\**" />
+    <None Remove="SPS.UI\**" />
   </ItemGroup>
 
   <ItemGroup>
