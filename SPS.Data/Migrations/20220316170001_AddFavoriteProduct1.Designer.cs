@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SPS.Data.Models;
 
 namespace SPS.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220316170001_AddFavoriteProduct1")]
+    partial class AddFavoriteProduct1
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -227,9 +229,9 @@ namespace SPS.Data.Migrations
                         {
                             Id = new Guid("6fcbe5a2-5c73-42fb-b334-748ffc143060"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "4d2eb05f-a2f6-48ff-8fa5-357bdda5dd82",
+                            ConcurrencyStamp = "3a28e712-f84b-4303-ac0f-e9add40a9cdb",
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            DateOfBirth = new DateTime(2022, 3, 17, 0, 4, 49, 260, DateTimeKind.Local).AddTicks(2467),
+                            DateOfBirth = new DateTime(2022, 3, 17, 0, 0, 0, 355, DateTimeKind.Local).AddTicks(6647),
                             Email = "admin@example.com",
                             EmailConfirmed = false,
                             FirstName = "Default",
@@ -237,10 +239,10 @@ namespace SPS.Data.Migrations
                             IsDeleted = false,
                             LastName = "Admin",
                             LockoutEnabled = false,
-                            ModifiedDate = new DateTime(2022, 3, 17, 0, 4, 49, 259, DateTimeKind.Local).AddTicks(1327),
+                            ModifiedDate = new DateTime(2022, 3, 17, 0, 0, 0, 354, DateTimeKind.Local).AddTicks(2902),
                             NormalizedEmail = "ADMIN@EXAMPLE.COM",
                             NormalizedUserName = "ADMIN",
-                            PasswordHash = "AQAAAAEAACcQAAAAEJD2iRYmT60GeAefgI+Mufp48Z3qhBkdKPv7mLm9Ib84/KZ6JvGpAzDlO/DhuzZqAw==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEKIe0w62ug11XXlBB2HbDTDfaWApnh79RIhlibpv/trlecoUEViYHe5CtVmHqXU00w==",
                             PhoneNumber = "123456",
                             PhoneNumberConfirmed = false,
                             TwoFactorEnabled = false,
@@ -542,14 +544,14 @@ namespace SPS.Data.Migrations
                         new
                         {
                             Id = new Guid("e9715a27-60a4-4f3e-a0c9-ac1765cd4126"),
-                            ConcurrencyStamp = "c1f02a20-5d92-4233-98ca-1b031ef7a17b",
+                            ConcurrencyStamp = "349aaa41-0720-49c3-a0d4-de516201ce79",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
                             Id = new Guid("bcc8996d-ff06-4519-a009-f7cf3be4ff45"),
-                            ConcurrencyStamp = "b08ff33e-d693-42e3-8865-a5328b2e3125",
+                            ConcurrencyStamp = "8a10ea5b-f347-47a7-85d2-a625170958a7",
                             Name = "Customer",
                             NormalizedName = "CUSTOMER"
                         });

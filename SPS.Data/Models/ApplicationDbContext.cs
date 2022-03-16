@@ -18,6 +18,7 @@ namespace SPS.Data.Models
         public DbSet<Category> Categories { set; get; }
         public DbSet<Product> Products { set; get; }
         public DbSet<ProductImage> ProductImages { set; get; }
+        public DbSet<FavoriteProduct> FavoriteProduct { set; get; }
         public DbSet<Promotion> Promotions { set; get; }
         public DbSet<Order> Orders { set; get; }
         public DbSet<OrderDetail> OrderDetails { set; get; }
