@@ -11,7 +11,7 @@ using SPS.Core.Extensions;
 using SPS.Core.Models.Account;
 using SPS.Core.Models.Photos;
 using SPS.Service.Accounts.Mapper;
-using SPS.Service.Categorys.Mapper;
+using SPS.Service.Categories.Mapper;
 using SPS.Service.OrderDetails.Mapper;
 using SPS.Service.Orders.Mapper;
 using SPS.Service.ProductImages.Mapper;
