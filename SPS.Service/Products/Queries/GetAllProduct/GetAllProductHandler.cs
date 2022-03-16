@@ -30,6 +30,7 @@ namespace SPS.Service.Products.Queries.GetAllProduct
         {
             var productModel = _productRepo.InitQuery()
                 .Include(x=>x.Category)
+                    .ThenInclude(x=>x.ParentId)
                 .Include(x=>x.ProductImages);
             var productList = _mapper.ProjectTo<ProductModel>(productModel);
             var result = await _pageList.GetPaginationAsync(productList, request.PageIndex, request.PageSize);

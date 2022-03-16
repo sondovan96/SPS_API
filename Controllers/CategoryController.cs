@@ -2,11 +2,11 @@
 using Microsoft.AspNetCore.Mvc;
 using SPS.Core.Models.Category;
 using SPS.Core.Models.Result;
-using SPS.Service.Categorys.Commands.AddCategory;
-using SPS.Service.Categorys.Commands.DeleteCategory;
-using SPS.Service.Categorys.Commands.UpdateCategory;
-using SPS.Service.Categorys.Queries.GetAllCategory;
-using SPS.Service.Categorys.Queries.GetCategoryById;
+using SPS.Service.Categories.Commands.AddCategory;
+using SPS.Service.Categories.Commands.DeleteCategory;
+using SPS.Service.Categories.Commands.UpdateCategory;
+using SPS.Service.Categories.Queries.GetAllCategory;
+using SPS.Service.Categories.Queries.GetCategoryById;
 using Swashbuckle.AspNetCore.Annotations;
 using System;
 using System.Threading.Tasks;
