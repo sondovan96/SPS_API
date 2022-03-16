@@ -23,6 +23,7 @@ namespace SPS.Core.Models.Product
         public int ViewCount { get; set; }
         public string Image { get; set; }
         public ICollection<ProductImage> ProductImages { get; set; }
+        public ICollection<Data.Models.Entities.FavoriteProduct> FavoriteProduct { get; set; }
         public Data.Models.Entities.Category Category { get; set; }
         public Guid IdCategory { get; set; }
         public DateTime CreatedDate { get; set; }

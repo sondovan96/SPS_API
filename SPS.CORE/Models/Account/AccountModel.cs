@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SPS.Data.Models.Entities;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -13,6 +14,7 @@ namespace SPS.Core.Models.Account
         public bool IsConfirmedEmail { set; get; }
         public IList<string> Roles { get; set; }
         public Token Token { set; get; }
+        public ICollection<Data.Models.Entities.FavoriteProduct> FavoriteProduct { get; set; }
     }
 
     public class Token

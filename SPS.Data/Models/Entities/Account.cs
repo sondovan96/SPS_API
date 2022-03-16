@@ -17,5 +17,6 @@ namespace SPS.Data.Models.Entities
         public bool IsDeleted { get; set; }
 
         public ICollection<Order> Orders { set; get; }
+        public ICollection<FavoriteProduct> FavoriteProduct { get; set; }
     }
 }

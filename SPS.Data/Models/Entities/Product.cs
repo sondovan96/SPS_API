@@ -23,6 +23,7 @@ namespace SPS.Data.Models.Entities
         public Category Category { get; set; }
 
         public ICollection<ProductImage> ProductImages { get; set; }
+        public ICollection<FavoriteProduct> FavoriteProduct { get; set; }
         public ICollection<OrderDetail> OrderDetails { get; set; }
 
         public DateTime CreatedDate { get; set; }
