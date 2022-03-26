@@ -20,6 +20,7 @@ namespace SPS.API.Extensions
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddScoped<IPhotoAccessor, PhotoAccessor>();
 
+
             services.Scan(scan =>
             {
                 scan.FromAssemblies(Assembly.Load("SPS.Service"))

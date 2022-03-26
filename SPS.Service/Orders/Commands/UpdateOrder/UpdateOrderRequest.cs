@@ -1,4 +1,5 @@
-﻿using MediatR;
+﻿#nullable enable
+using MediatR;
 using SPS.Core.Models.Order;
 using SPS.Data.Models.Enums;
 using System;
@@ -18,8 +19,8 @@ namespace SPS.Service.Orders.Commands.UpdateOrder
         public string PhoneRecipient { get; set; }
         public decimal OrderTotal { get; set; }
         public OrderStatus OrderStatus { get; set; }
-        public string PaymentStatus { get; set; }
-        public string SessionId { get; set; }
-        public string PaymentIntentId { get; set; }
+        public string? PaymentStatus { get; set; }
+        public string? SessionId { get; set; }
+        public string? PaymentIntentId { get; set; }
     }
 }

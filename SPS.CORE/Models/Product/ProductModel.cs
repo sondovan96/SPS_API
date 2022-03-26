@@ -8,7 +8,6 @@ namespace SPS.Core.Models.Product
 {
     public class ProductModel
     {
-        [JsonIgnore]
         public Guid Id { get; set; }
         public string ProductName { get; set; }
         public string ProductDescription { get; set; }

@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using MediatR;
 using SPS.Core.Exceptions;
+using SPS.Core.Helper;
 using SPS.Core.Models.Product;
 using SPS.Data.Models.Entities;
 using SPS.Data.Repositories;
@@ -34,6 +35,7 @@ namespace SPS.Service.Products.Commands.UpdateProduct
                 throw new ResourceNotFoundException(nameof(request.Id), request.Id);
             }
             product = _mapper.Map<Product>(request);
+            product.MetaTitle = SeoHelper.ToSeoUrl(request.ProductName);
             product.ModifiedDate = DateTime.UtcNow;
 
             _productRepo.Update(product);

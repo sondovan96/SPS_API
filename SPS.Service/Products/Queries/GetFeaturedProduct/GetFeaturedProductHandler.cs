@@ -7,31 +7,33 @@ using SPS.Core.Models.Result;
 using SPS.Data.Repositories;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace SPS.Service.Products.Queries.GetAllProduct
+namespace SPS.Service.Products.Queries.GetFeaturedProduct
 {
-    public class GetAllProductHandler : IRequestHandler<GetAllProductRequest, PageListResult<ProductModel>>
+    public class GetFeaturedProductHandler : IRequestHandler<GetFeaturedProductRequest, PageListResult<ProductModel>>
     {
         private readonly IMapper _mapper;
         private readonly IProductRepo _productRepo;
         private readonly IPageList _pageList;
 
-        public GetAllProductHandler(IMapper mapper, IProductRepo productRepo, IPageList pageList)
+        public GetFeaturedProductHandler(IMapper mapper, IProductRepo productRepo, IPageList pageList)
         {
             _mapper = mapper;
             _productRepo = productRepo;
             _pageList = pageList;
         }
 
-        public async Task<PageListResult<ProductModel>> Handle(GetAllProductRequest request, CancellationToken cancellationToken)
+        public async Task<PageListResult<ProductModel>> Handle(GetFeaturedProductRequest request, CancellationToken cancellationToken)
         {
             var productModel = _productRepo.InitQuery()
-                .Include(x => x.Category)
-                    .ThenInclude(x => x.ParentCategory)
-                .Include(x => x.ProductImages);
+                .Where(x => x.FeaturedProduct == true)
+                .OrderByDescending(x => x.CreatedDate)
+               .Include(x => x.Category)
+               .Include(x => x.ProductImages);
             var productList = _mapper.ProjectTo<ProductModel>(productModel);
             var result = await _pageList.GetPaginationAsync(productList, request.PageIndex, request.PageSize);
             return result;
