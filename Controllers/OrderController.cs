@@ -28,7 +28,7 @@ namespace SPS.API.Controllers
             return Ok(await _mediator.Send(request));
         }
 
-        [HttpPost]
+        [HttpPost("AddOrder")]
         public async Task<IActionResult> CreateOrder([FromBody] CreateOrderRequest request)
         {
             var result = await _mediator.Send(request);

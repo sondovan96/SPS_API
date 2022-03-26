@@ -1,13 +1,15 @@
 using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
 using SPS.API.Extensions;
+using SPS.API.Filters;
 using SPS.Core.Extensions;
+using SPS.Core.Helper;
 using SPS.Core.Models.Account;
 using SPS.Core.Models.Photos;
 using SPS.Service.Accounts.Mapper;
@@ -17,7 +19,8 @@ using SPS.Service.Orders.Mapper;
 using SPS.Service.ProductImages.Mapper;
 using SPS.Service.Products.Mapper;
 using System;
-
+using System.Collections.Generic;
+using System.Security.Principal;
 
 namespace SPS_API
 {
@@ -55,6 +58,36 @@ namespace SPS_API
             services.AddVersioning();
 
             services.AddOptions();
+            services.AddMvc(opt =>
+            {
+                opt.Filters.Add<ResponseActionFilterAttribute>();
+            });
+
+            services.Configure<ApiBehaviorOptions>(options =>
+            {
+                options.InvalidModelStateResponseFactory = (actionContext) =>
+                {
+                    var errors = new List<ErrorDetail>();
+
+                    foreach (var modelStateKey in actionContext.ModelState.Keys)
+                    {
+                        var modelStateVal = actionContext.ModelState[modelStateKey];
+                        foreach (var error in modelStateVal.Errors)
+                        {
+                            errors.Add(new ErrorDetail()
+                            {
+                                ErrorMessage = error.ErrorMessage,
+                                ErrorMessageId = modelStateKey,
+                            });
+                        }
+                    }
+                    return new Response<object>((System.Net.HttpStatusCode)400, null, errors);
+                };
+            });
+
+
+
+
 
             services.AddMediatR(AppDomain.CurrentDomain.GetAssemblies());
             //Register AutoMapper

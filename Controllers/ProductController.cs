@@ -6,6 +6,9 @@ using SPS.Service.Products.Commands.AddProduct;
 using SPS.Service.Products.Commands.DeleteProduct;
 using SPS.Service.Products.Commands.UpdateProduct;
 using SPS.Service.Products.Queries.GetAllProduct;
+using SPS.Service.Products.Queries.GetFeaturedProduct;
+using SPS.Service.Products.Queries.GetHotProduct;
+using SPS.Service.Products.Queries.GetNewProduct;
 using SPS.Service.Products.Queries.GetProductById;
 using System;
 using System.Threading.Tasks;
@@ -40,6 +43,37 @@ namespace SPS.API.Controllers
         /// <returns></returns>
         [HttpGet("GetProduct/{Id}")]
         public async Task<IActionResult> GetProductById([FromRoute] GetProductByIdRequest request)
+        {
+            return Ok(await _mediator.Send(request));
+        }
+
+        /// <summary>
+        /// GetNewProduct
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
+        [HttpGet("GetNewProduct")]
+        public async Task<IActionResult> GetNewProduct([FromQuery] GetNewProductRequest request)
+        {
+            return Ok(await _mediator.Send(request));
+        }
+        /// <summary>
+        /// GetHotProduct
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
+        [HttpGet("GetHotProduct")]
+        public async Task<IActionResult> GetHotProduct([FromQuery] GetHotProductRequest request)
+        {
+            return Ok(await _mediator.Send(request));
+        }
+        /// <summary>
+        /// GetFeaturedProduct
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
+        [HttpGet("GetFeaturedProduct")]
+        public async Task<IActionResult> GetFeaturedProduct([FromQuery] GetFeaturedProductRequest request)
         {
             return Ok(await _mediator.Send(request));
         }

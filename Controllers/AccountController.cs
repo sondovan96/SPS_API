@@ -9,9 +9,11 @@ using SPS.Service.Accounts.Command.RegisterAccount;
 using SPS.Service.Accounts.JWTGeneration;
 using SPS.Service.Accounts.Queries.EmailConfirm;
 using SPS.Service.Accounts.Queries.EmailConfirmToken;
+using SPS.Service.Accounts.Queries.GetInfoUser;
 using SPS.Service.Accounts.Queries.Login;
 using SPS.Service.Accounts.Queries.Logout;
 using System;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace SPS.API.Controllers
@@ -103,6 +105,23 @@ namespace SPS.API.Controllers
         {
             JWTGenerationRequest result= await _mediator.Send(request);
             return Ok(await _mediator.Send(result));
+        }
+
+        /// <summary>
+        /// Get infomation of current user
+        /// </summary>
+        [Authorize]
+        [HttpGet]
+        public async Task<IActionResult> GetInfoUser()
+        {
+            string userId = "";
+            if(HttpContext.User.Identity is ClaimsIdentity identity)
+            {
+                userId = identity.FindFirst(ClaimTypes.NameIdentifier).Value;
+            }
+            var request = new GetInfoUserRequest() { Id = Guid.Parse(userId) };
+            var result = await _mediator.Send(request);
+            return Ok(result);
         }
     }
 }

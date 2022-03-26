@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using MediatR;
+using SPS.Core.Helper;
 using SPS.Core.Models.Product;
 using SPS.Data.Models.Entities;
 using SPS.Data.Repositories;
@@ -30,6 +31,7 @@ namespace SPS.Service.Products.Commands.AddProduct
             var product = _mapper.Map<AddProductRequest, Product>(request);
             product.CreatedDate = DateTime.UtcNow;
             product.ModifiedDate = DateTime.UtcNow;
+            product.MetaTitle = SeoHelper.ToSeoUrl(request.ProductName);
 
             await _productRepo.AddAsync(product);
 

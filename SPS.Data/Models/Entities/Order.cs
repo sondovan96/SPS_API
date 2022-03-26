@@ -21,7 +21,7 @@ namespace SPS.Data.Models.Entities
         public string? PhoneRecipient { get; set; }
         public DateTime OrderDate { get; set; } = DateTime.UtcNow;
         public decimal OrderTotal { get; set; }
-        public OrderStatus OrderStatus { get;set; }
+        public string OrderStatus { get;set; }
         public string? PaymentStatus { get; set; }
         public string? SessionId { get; set; }
         public string? PaymentIntentId { get; set; }

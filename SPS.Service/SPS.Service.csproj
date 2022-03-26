@@ -11,11 +11,17 @@
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.1.22" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.22" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.22" />
+    <PackageReference Include="RestSharp" Version="107.3.0" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\SPS.CORE\SPS.Core.csproj" />
     <ProjectReference Include="..\SPS.Data\SPS.Data.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Roles\Command\" />
+    <Folder Include="Roles\Mapper\" />
   </ItemGroup>
 
 </Project>

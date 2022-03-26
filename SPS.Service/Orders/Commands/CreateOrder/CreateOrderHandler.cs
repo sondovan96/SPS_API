@@ -28,9 +28,11 @@ namespace SPS.Service.Orders.Commands.CreateOrder
         public async Task<OrderModel> Handle(CreateOrderRequest request, CancellationToken cancellationToken)
         {
             var order = _mapper.Map<CreateOrderRequest, Order>(request);
-            order.OrderStatus = Data.Models.Enums.OrderStatus.Pending;
+            order.OrderStatus = Data.Models.Enums.OrderStatus.Pending.ToString();
             await _orderRepo.AddAsync(order);
-            await _unitOfWork.SaveChangesAsync();
+
+            var result = await _unitOfWork.SaveChangesAsync();
+            
             return _mapper.Map<OrderModel>(order);
         }
     }
